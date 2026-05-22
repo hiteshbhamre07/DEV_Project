@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="10" fill="#1a3a8f"/>
+  <text
+    x="32" y="46"
+    font-family="Arial Black, Arial, sans-serif"
+    font-weight="900"
+    font-size="34"
+    fill="white"
+    text-anchor="middle"
+    letter-spacing="-1">RP</text>
+</svg>

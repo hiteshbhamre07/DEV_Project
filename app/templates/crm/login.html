@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}CRM Login - Rover CRM{% endblock %}
+
+{% block body_class %}glass-body{% endblock %}
+
+{% block extra_css %}
+.brand-title {
+    color: #f8fafc;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.brand-accent {
+    color: var(--accent-cyan);
+}
+.portal-badge {
+    background: rgba(139, 92, 246, 0.2);
+    color: #a78bfa;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    display: inline-block;
+    margin-bottom: 20px;
+}
+.form-label {
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    color: #cbd5e1;
+}
+.btn-glass {
+    background: linear-gradient(90deg, #8b5cf6, #6366f1);
+    border: none;
+    color: #fff;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+.btn-glass:hover {
+    background: linear-gradient(90deg, #7c3aed, #4f46e5);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+{% endblock %}
+
+{% block content %}
+<div class="glass-card">
+    <div class="text-center mb-4">
+        <span class="portal-badge">STAFF PORTAL</span>
+        <h2 class="brand-title">Rover <span class="brand-accent">CRM</span></h2>
+        <p class="text-secondary" style="font-size: 0.9rem;">Sign in to access your workspace</p>
+    </div>
+
+    <form id="crmLoginForm">
+        <div class="mb-4">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" class="form-control glass-input" id="email" placeholder="user@rovercrm.com" required>
+        </div>
+        
+        <div class="mb-4">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control glass-input" id="password" placeholder="••••••••" required>
+        </div>
+
+        <div id="errorAlert" class="alert alert-danger d-none" style="background: rgba(220, 53, 69, 0.1); border: 1px solid rgba(220, 53, 69, 0.3); color: #ff6b6b; font-size: 0.85rem;" role="alert">
+            Invalid credentials. Please try again.
+        </div>
+
+        <button type="submit" class="btn btn-glass w-100 mt-2">LOGIN TO SECURE PORTAL</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    document.getElementById('crmLoginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const errorAlert = document.getElementById('errorAlert');
+        
+        errorAlert.classList.add('d-none');
+        
+        try {
+            const response = await fetch('/token', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ 'username': email, 'password': password })
+            });
+
+            if (response.ok) {
+                // The cookie is set by the backend automatically via response headers
+                window.location.href = '/crm/dashboard';
+            } else {
+                throw new Error("Invalid credentials");
+            }
+        } catch (err) {
+            errorAlert.classList.remove('d-none');
+            errorAlert.innerText = err.message || "Invalid credentials. Please try again.";
+        }
+    });
+</script>
+{% endblock %}

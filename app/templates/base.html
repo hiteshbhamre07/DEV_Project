@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Rover CRM{% endblock %}</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Standard Dashboard Colors */
+            --bg-dark: #12141d;
+            --sidebar-bg: #1a1d27;
+            --card-bg: rgba(30, 33, 43, 0.6);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --accent-cyan: #06b6d4;
+            --icon-cyan: #22d3ee;
+            --icon-purple: #a855f7;
+            --icon-green: #10b981;
+            --icon-red: #f43f5e;
+            --border-color: rgba(255, 255, 255, 0.08);
+
+            /* Login specific overrides & shared */
+            --login-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            color: var(--text-main);
+            /* Defaults to dashboard body style */
+            background-color: var(--bg-dark);
+            overflow-x: hidden;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Reusable Glassmorphism classes for logins */
+        .glass-body {
+            background: var(--login-bg);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #f8fafc;
+            padding: 12px 15px;
+            border-radius: 10px;
+        }
+
+        .glass-input:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-cyan);
+            color: #f8fafc;
+            box-shadow: 0 0 0 0.25rem rgba(6, 182, 212, 0.25);
+        }
+
+        .glass-input::placeholder { color: rgba(248, 250, 252, 0.4); }
+
+        {% block extra_css %}{% endblock %}
+    </style>
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+    {% block content %}
+    <!-- Main content goes here -->
+    {% endblock %}
+
+    {% block scripts %}
+    <!-- Shared or specific scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% endblock %}
+</body>
+</html>
