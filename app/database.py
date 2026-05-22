@@ -7,10 +7,10 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-# PostgreSQL Docker database URL
+# Database URL
 SQLALCHEMY_DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql+psycopg2://postgres:postgres@db:5432/rpcrm"
+    "postgresql+psycopg2://postgres:admin123@localhost/rp_crm_db"
 )
 
 # Create SQLAlchemy engine
